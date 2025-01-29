@@ -18,7 +18,6 @@ interface ProductsCatalogProps {
 
 const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ products }) => {
   const dispatch = useAppDispatch();
-  const allProducts = useAppSelector((state) => state.products.allProducts);
   const filteredProducts = useAppSelector(
     (state) => state.products.filteredProducts
   );
@@ -29,8 +28,8 @@ const ProductsCatalog: React.FC<ProductsCatalogProps> = ({ products }) => {
     dispatch(updateFilteredProducts(products));
   }, [dispatch, products]);
 
-  let start = (options.currentPage - 1) * 10;
-  let end = start + 10;
+  const start = (options.currentPage - 1) * 10;
+  const end = start + 10;
 
   return (
     <div className="w-full flex flex-col gap-5">

@@ -14,6 +14,7 @@ interface InitialStateType {
   allProducts: Product[];
   filteredProducts: Product[];
   options: Options;
+  cart: Product[];
 }
 
 const initialState: InitialStateType = {
@@ -24,6 +25,7 @@ const initialState: InitialStateType = {
     totalPages: 1,
     search: "",
   },
+  cart: [],
 };
 
 export const productsSlice = createSlice({
@@ -37,7 +39,7 @@ export const productsSlice = createSlice({
       state,
       action: PayloadAction<Product[] | undefined>
     ) => {
-      let products = action?.payload || state.allProducts;
+      const products = action?.payload || state.allProducts;
 
       let filteredProducts = [];
 
@@ -49,14 +51,25 @@ export const productsSlice = createSlice({
       state.options.totalPages = Math.ceil(filteredProducts.length / 10);
     },
     setOptions: (state, action: PayloadAction<Partial<Options>>) => {
-      let options = { ...state.options, ...action.payload };
+      const options = { ...state.options, ...action.payload };
       state.options = options;
+    },
+    addToCart: (state, action: PayloadAction<Product>) => {
+      state.cart.push(action.payload);
+    },
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllProducts, setOptions, updateFilteredProducts } =
-  productsSlice.actions;
+export const {
+  setAllProducts,
+  setOptions,
+  updateFilteredProducts,
+  addToCart,
+  removeFromCart,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;
