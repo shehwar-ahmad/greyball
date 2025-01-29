@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Product } from "@/types/product";
 import { useAppDispatch } from "@/lib/hooks";
@@ -35,6 +37,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         className="w-full h-48 object-cover mb-4"
         src={product.image}
         alt={product.title}
+        width={600}
+        height={192}
       />
       <h2 className="text-xl font-bold mb-2">{product.title}</h2>
       <p className="text-gray-700 mb-4">{product.description}</p>
