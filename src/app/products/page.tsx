@@ -5,8 +5,8 @@ export default async function Products() {
   const products = await fetchProducts();
 
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="text-xl font-semibold">Products</h1>
+    <div className="flex flex-col gap-8 w-full">
+      <h1 className="text-2xl font-semibold">Available Products</h1>
       <ProductsCatalog products={products} />
     </div>
   );
